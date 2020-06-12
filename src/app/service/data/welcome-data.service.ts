@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export class Welcome{
+export class Welcome {
   constructor(
-    message : string
-  ){}
+    message: string
+  ) { }
 }
 
 @Injectable({
@@ -13,7 +13,7 @@ export class Welcome{
 export class WelcomeDataService {
 
   constructor(
-    private httCliente : HttpClient
+    private httCliente: HttpClient
   ) { }
 
   getWelcomeMessage() {
@@ -23,4 +23,9 @@ export class WelcomeDataService {
   getWelcomeError() {
     return this.httCliente.get<Welcome>('http://localhost:8080/welcome-error');
   }
+
+  getWelcomeWithPathVariable(name: string) {
+    return this.httCliente.get<Welcome>(`http://localhost:8080/welcome/${name}`);
+  }
+
 }

@@ -26,11 +26,11 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeFromService() {
-    this.welcomeService.getWelcomeError().subscribe(
+    this.welcomeService.getWelcomeWithPathVariable("Nelson").subscribe(
       response => this.handleSuccessfulResponse(response),
       error => this.handleErrorResponse(error)
     );
-    console.log("Last line of the welcome message");
+    // console.log("Last line of the welcome message");
   }
 
   handleSuccessfulResponse(response){
