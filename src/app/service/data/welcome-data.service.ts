@@ -19,4 +19,8 @@ export class WelcomeDataService {
   getWelcomeMessage() {
     return this.httCliente.get<Welcome>('http://localhost:8080/welcome-message');
   }
+
+  getWelcomeError() {
+    return this.httCliente.get<Welcome>('http://localhost:8080/welcome-error');
+  }
 }

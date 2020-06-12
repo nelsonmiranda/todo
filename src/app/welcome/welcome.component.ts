@@ -26,16 +26,24 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeFromService() {
-    this.welcomeService.getWelcomeMessage().subscribe(
-      response => this.handleSuccessfulResponse(response)
+    this.welcomeService.getWelcomeError().subscribe(
+      response => this.handleSuccessfulResponse(response),
+      error => this.handleErrorResponse(error)
     );
-    // console.log("Last line of the welcome message");
+    console.log("Last line of the welcome message");
   }
 
   handleSuccessfulResponse(response){
     // console.log(response);
     this.welcomeMessage = response.message;
-    console.log(response.message);
+    // console.log(response.message);
   }
 
+  handleErrorResponse(error){
+    // console.log(error);
+    // console.log(error.error);
+    this.welcomeMessage = error.error.message;
+    // console.log(error.error.message);
+    // console.log(error.message);
+  }
 }
