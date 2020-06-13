@@ -25,18 +25,30 @@ export class TodoComponent implements OnInit {
   }
 
   refreshTodo(){
-    this.todo = new Todo(1,'','', new Date(),false);
-    this.todoService.getTodo('in28minutes', this.id).subscribe(
-      data => this.todo = data
-    ); 
+    this.todo = new Todo(this.id,'','', new Date(),false);
+    if(this.id > 0){
+      this.todoService.getTodo('in28minutes', this.id).subscribe(
+        data => this.todo = data
+      ); 
+    }
   }
 
   saveTodo(){
-    this.todoService.updateTodo('in28minutes', this.id, this.todo).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['todos']);
-      }
-    );
+    if(this.id > 0){
+      this.todoService.updateTodo('in28minutes', this.id, this.todo).subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['todos']);
+        }
+      );
+    }else{
+      this.todo.username = 'in28minutes';
+      this.todoService.createTodo('in28minutes', this.todo).subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['todos']);
+        }
+      );
+    }
   }
 }
