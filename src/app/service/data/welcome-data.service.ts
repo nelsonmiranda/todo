@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class Welcome {
   constructor(
     message: string
@@ -25,7 +24,17 @@ export class WelcomeDataService {
   }
 
   getWelcomeWithPathVariable(name: string) {
-    return this.httCliente.get<Welcome>(`http://localhost:8080/welcome/${name}`);
+    let authorizationString = this.createBasicAuthenticationHttpHeader();
+    let headers = new HttpHeaders({
+      Authorization : authorizationString
+    });    
+    return this.httCliente.get<Welcome>(`http://localhost:8080/welcome/${name}`, {headers});
   }
 
+  createBasicAuthenticationHttpHeader(){
+    let username = 'user';
+    let password = 'password';
+    let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthenticationString;
+  }
 }
