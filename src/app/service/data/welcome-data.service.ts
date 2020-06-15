@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { API_URL } from 'src/app/app.constants';
 export class Welcome {
   constructor(
     message: string
@@ -16,11 +17,11 @@ export class WelcomeDataService {
   ) { }
 
   getWelcomeMessage() {
-    return this.httCliente.get<Welcome>('http://localhost:8080/welcome-message');
+    return this.httCliente.get<Welcome>(`${API_URL}/welcome-message`);
   }
 
   getWelcomeError() {
-    return this.httCliente.get<Welcome>('http://localhost:8080/welcome-error');
+    return this.httCliente.get<Welcome>(`${API_URL}/welcome-error`);
   }
 
   getWelcomeWithPathVariable(name: string) {
@@ -28,11 +29,11 @@ export class WelcomeDataService {
     let headers = new HttpHeaders({
       Authorization : authorizationString
     });    
-    return this.httCliente.get<Welcome>(`http://localhost:8080/welcome/${name}`, {headers});
+    return this.httCliente.get<Welcome>(`${API_URL}/welcome/${name}`, {headers});
   }
 
   createBasicAuthenticationHttpHeader(){
-    let username = 'user';3
+    let username = 'user';
     let password = 'password';
     let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
     return basicAuthenticationString;
