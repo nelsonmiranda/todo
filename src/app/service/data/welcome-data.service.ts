@@ -32,7 +32,7 @@ export class WelcomeDataService {
   }
 
   createBasicAuthenticationHttpHeader(){
-    let username = 'user';
+    let username = 'user';3
     let password = 'password';
     let basicAuthenticationString = 'Basic ' + window.btoa(username + ':' + password);
     return basicAuthenticationString;
